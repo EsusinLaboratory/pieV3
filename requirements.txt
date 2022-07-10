@@ -1,7 +1,6 @@
 discord.py
 asyncio
 qrcode
-request
 bs4
 discord_buttons_plugin
 googletrans
