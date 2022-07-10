@@ -83,7 +83,7 @@ async def QR(ctx,*, query):
   else:
     img = qrcode.make(qrmade)
     img.save('D:\pieV3\qr.png')
-    file = discord.File("D:\pieV3\qr.png")
+    file = discord.File(os.path.dirname(os.path.realpath(__file__))+"\qr.png")
 
     embed = discord.Embed(
       title=(qrmade+"에 관한 QR코드"),
@@ -1133,7 +1133,7 @@ async def 롤(ctx, *, query):
 
 @bot.command()
 async def 정보(ctx):
-    file = discord.File("D:\pieV3\;thanks.png")
+    file = discord.File(os.path.dirname(os.path.realpath(__file__))+"\;thanks.png")
     embed = discord.Embed(
         title='정보',
         colour=0x7DB249)
