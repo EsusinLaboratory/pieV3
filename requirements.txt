@@ -1,7 +1,6 @@
 discord.py
 asyncio
 qrcode
-random
 urllib
 request
 bs4
