@@ -1,2 +1,9 @@
 discord.py
 asyncio
+qrcode
+random
+urllib
+request
+bs4
+discord_buttons_plugin
+googletrans
