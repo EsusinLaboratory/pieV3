@@ -82,7 +82,7 @@ async def QR(ctx,*, query):
         await ctx.channel.send(embed=embed)
   else:
     img = qrcode.make(qrmade)
-    img.save('D:\pieV3\qr.png')
+    img.save(os.path.dirname(os.path.realpath(__file__))+"\qr.png")
     file = discord.File(os.path.dirname(os.path.realpath(__file__))+"\qr.png")
 
     embed = discord.Embed(
@@ -1137,7 +1137,7 @@ async def 정보(ctx):
     embed = discord.Embed(
         title='정보',
         colour=0x7DB249)
-    embed.add_field(name='> 소프트웨어 버전', value='`2.2.1` **Viaduct**')
+    embed.add_field(name='> 소프트웨어 버전', value='`2.2.3` **Waiotapu**')
     embed.add_field(name='> 언어 버전', value='`Python® Discord.py Module Version 1.7.3`')
     embed.add_field(name='> 라이센스', value='`Official`')
     embed.add_field(name='> 빌드', value='`Build 22096.87.21`')
