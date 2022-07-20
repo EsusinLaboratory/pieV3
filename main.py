@@ -1394,7 +1394,8 @@ async def on_member_remove(self, member):
   await find_first_channel(member.guild.text_channels).send(msg)
   return None
 @bot.command()
-async def 테스트(ctx):
-  author = await ctx.get_user_info(829314328988876810)
-  await ctx.channel.send(author, "hello world")
+async def 룰렛(ctx,*,query):
+  msg = (ctx.message.content[4:])
+  rullet = msg.split('/')
+  await ctx.channel.send(rullet)
 bot.run(os.environ['token'])
