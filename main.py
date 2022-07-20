@@ -1395,10 +1395,27 @@ async def on_member_remove(self, member):
   return None
 @bot.command()
 async def 룰렛(ctx,*,query):
+  global rullet
+  global rulletcount
+  global rulletposition
   msg = (ctx.message.content[4:])
   rullet = msg.split('/')
   rulletcount = len(rullet)
   selection = random.randrange(0, rulletcount+1)
   selectioncontent = rullet[selection]
-  await ctx.channel.send(selectioncontent)
+  rulletposition = rullet.index(selectioncontent)
+  global output
+  global cursur
+  output = "0"
+  cursur = 0
+  for x in range(rulletposition):
+    output = output + rullet[cursur]
+    cursur = cursur+1
+  output = output +" **"+ rullet[rulletposition] +"** "
+  if rulletcount > rulletposition:
+    cursur = cursur+2
+    for x in range(rulletcount-rulletposition):
+      output = output + rullet[cursur]
+      cursur = cursur+1
+  await ctx.channel.send(output)
 bot.run(os.environ['token'])
