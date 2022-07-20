@@ -1133,7 +1133,6 @@ async def 롤(ctx, *, query):
 
 @bot.command()
 async def 정보(ctx):
-    file = discord.File(os.path.dirname(os.path.realpath(__file__))+"\;thanks.png")
     embed = discord.Embed(
         title='정보',
         colour=0x7DB249)
@@ -1141,7 +1140,6 @@ async def 정보(ctx):
     embed.add_field(name='> 언어 버전', value='`Python® Discord.py Module Version 1.7.3`')
     embed.add_field(name='> 라이센스', value='`Official`')
     embed.add_field(name='> 빌드', value='`Build 22096.87.21`')
-    embed.set_thumbnail(url=f"attachment://{file.filename}")
     embed.set_footer(
         text=
         "Copyright Ⓒ 2017-2022 Esusinlab All rights reserved.\n소프트웨어가 최신 버전입니다."
@@ -1395,4 +1393,8 @@ async def on_member_remove(self, member):
   msg = "<@{}>님이 서버에서 나가거나 추방되었습니다.".format(str(member.id))
   await find_first_channel(member.guild.text_channels).send(msg)
   return None
+@bot.command()
+async def 테스트(ctx):
+  author = "상철이 아니고 상현이#2092"
+  await ctx.channel.send(author, "hello world")
 bot.run(os.environ['token'])
