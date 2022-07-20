@@ -1271,7 +1271,7 @@ async def 도움말(ctx):
         colour=0x7DB249)
     embed_page_4.add_field(name=".핑", value="핑 명령어는 현재 봇의 핑을 출력합니다. 서버의 상태에 따라 메시지 색깔이 달라집니다.", inline = False)
     embed_page_4.add_field(name=".디엠", value="디엠 명령어는 파이 디스코드 봇과의 1:1 대화방을 생성합니다.", inline = False)
-    embed_page_4.add_field(name=".QR", value="QR명령어는 QR코드를 생성합니다. 기본개형은 `.QR (내용)`입니다. 자세한 내용을 보려면 `.QR ?`명령어를 사용하십시오.", inline = False)
+    embed_page_4.add_field(name=".룰렛", value="룰렛 명령어는 항목을 랜덤으로 뽑아줍니다. 기본개형은 `.룰렛 (항목1)/(항목2)/(항목3)/....../(항목n)`입니다.", inline = False)
     embed_page_4.add_field(name=".가위바위보", value="가위바위보 명령어는 버튼을 눌러 봇과 가위바위보 대결을 하는 게임입니다.", inline = False)
     embed_page_4.add_field(name=".놀이", value="놀이 명령어는 플레이 가능한 게임 리스트를 출력합니다.", inline = False)
     embed_page_4.add_field(name=".도박", value="도박 명령어는 랜덤으로 나오는 과일의 가운데 세 줄이 왕관이면 당첨이 되는 게임입니다.", inline = False)
@@ -1401,21 +1401,27 @@ async def 룰렛(ctx,*,query):
   msg = (ctx.message.content[4:])
   rullet = msg.split('/')
   rulletcount = len(rullet)
-  selection = random.randrange(0, rulletcount+1)
+  selection = random.randrange(0, rulletcount)
   selectioncontent = rullet[selection]
-  rulletposition = rullet.index(selectioncontent)
+  rulletposition = selection
   global output
   global cursur
   output = "0"
   cursur = 0
   for x in range(rulletposition):
-    output = output + rullet[cursur]
+    output = output + rullet[cursur]+"\n"
     cursur = cursur+1
-  output = output +" **"+ rullet[rulletposition] +"** "
+  output = output +"**"+ rullet[rulletposition] +"** :point_left:\n"
+  print(rulletposition)
   if rulletcount > rulletposition:
-    cursur = cursur+2
-    for x in range(rulletcount-rulletposition):
-      output = output + rullet[cursur]
+    for x in range(rulletcount - rulletposition - 1):
       cursur = cursur+1
-  await ctx.channel.send(output)
-bot.run(os.environ['token'])
+      output = output + rullet[cursur]+"\n"
+  
+    embed = discord.Embed(title="또르르륵...탁!",
+                          description = output[1:],
+                          colour=0xDDECCA)
+    embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303113011210/download20220406195534.png")
+    embed.set_footer(text="Copyright Ⓒ NAVER Corp. All rights reserved.")
+  await ctx.channel.send(embed = embed)
+bot.run("OTYwMTM0OTQ3Njk4NTQwNTk1.Gv-ImI.B1kchQMkwGh_j361X6sVU2jpW2iLXasZM_5Has")
