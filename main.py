@@ -1395,6 +1395,6 @@ async def on_member_remove(self, member):
   return None
 @bot.command()
 async def 테스트(ctx):
-  author = "상철이 아니고 상현이#2092"
+  author = await ctx.get_user_info(829314328988876810)
   await ctx.channel.send(author, "hello world")
 bot.run(os.environ['token'])
