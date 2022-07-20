@@ -1144,7 +1144,7 @@ async def 정보(ctx):
         text=
         "Copyright Ⓒ 2017-2022 Esusinlab All rights reserved.\n소프트웨어가 최신 버전입니다."
     )
-    await ctx.channel.send(embed=embed, file = file)
+    await ctx.channel.send(embed=embed)
 
 @bot.command()
 async def 핑(ctx):
