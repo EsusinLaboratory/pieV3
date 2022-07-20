@@ -1424,4 +1424,4 @@ async def 룰렛(ctx,*,query):
     embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303113011210/download20220406195534.png")
     embed.set_footer(text="Copyright Ⓒ NAVER Corp. All rights reserved.")
   await ctx.channel.send(embed = embed)
-bot.run("OTYwMTM0OTQ3Njk4NTQwNTk1.Gv-ImI.B1kchQMkwGh_j361X6sVU2jpW2iLXasZM_5Has")
+bot.run(os.environ['token'])
