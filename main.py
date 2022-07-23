@@ -45,6 +45,8 @@ food = [
     '한국인이라면 못참는 김치', '명절에 먹는 간장게장', '매운 맛이 일품인 양념게장', '바삭한 명량핫도그',
     '고소한 고니가 맛있는 동태탕', '전주의 명물! 전주비빔밥', '코카콜라가 뭔데?! 펩시', '따끈한 족발', '매콤한 신라면', '헥헥, 혀가 탄다.. 불닭볶음면!', '라면은 역시 진라면', '라면의 원조! 삼양라면'
 ]
+
+nonsense = ['**학생들이 싫어하는 피자**는?\n\n||**책 피자**||', '**곰이 다니는 목욕탕 이름**은?\n\n||**곰탕**||', '**신**이 화가 나면?\n\n||**신발끈**||', '**오래될수록 젊어 보이는 것**은?\n\n||**사진**||']
 @bot.event
 async def on_message(msg):
     if msg.author.bot: return None
@@ -1422,6 +1424,14 @@ async def 룰렛(ctx,*,query):
                           description = output[1:],
                           colour=0xDDECCA)
     embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303113011210/download20220406195534.png")
-    embed.set_footer(text="Copyright Ⓒ NAVER Corp. All rights reserved.")
   await ctx.channel.send(embed = embed)
+@bot.command()
+async def 넌센스(ctx):
+  content = nonsense[random.randrange(0, len(nonsense))]
+  embed = discord.Embed(title="한 번 맞춰봐!!",
+                        description = content,
+                        colour=0xDDECCA)
+  embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303553425498/110_20220410122834.png")
+  await ctx.channel.send(embed = embed)
+
 bot.run(os.environ['token'])
