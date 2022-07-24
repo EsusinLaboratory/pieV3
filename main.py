@@ -1371,23 +1371,19 @@ async def _번역(ctx:SlashContext, 내용:str, 언어명:str):
       print(result)
       embed = discord.Embed(title=content+'를 '+lang+'로 번역해봤어!', description=content+'를 '+lang+'로 번역한 결과는 **'+str(result.text)+'['+str(result.pronunciation)+']**야!', colour=0xff7676)
       embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303113011210/download20220406195534.png")
-      await ctx.channel.send(embed=embed)
+      await ctx.send(embed=embed)
       
     else:
       embed = discord.Embed(title=lang+'언어는 번역할 수 없어 ;(', description='번역 기능은 `/번역 [내용]:(내용) [언어명]:(언어명)`으로 사용할 수 있어! 구글 번역기 API를 이용하여 개발이 되었고, 사용할 수 있는 언어는 다음과 같아!\n**한국어**\n**중국어 번체**\n**중국어 간체**\n**일본어**\n**영어**', colour=0xff7676)
       embed.set_thumbnail(url = "https://media.discordapp.net/attachments/918381996483424306/962556561081897000/110_20220410122100.png")
-      await ctx.channel.send(embed=embed)
+      await ctx.send(embed=embed)
     
     
 
   elif msg == "?":
     embed = discord.Embed(title='번역 기능에 대해 자세히 알아봐!', description='번역 기능은 `/번역 [내용]:(내용) [언어명]:(언어명)`으로 사용할 수 있어! 구글 번역기 API를 이용하여 개발이 되었고, 사용할 수 있는 언어는 다음과 같아!\n**한국어**\n**중국어 번체**\n**중국어 간체**\n**일본어**\n**영어**', colour=0xff7676)
     embed.set_thumbnail(url = "https://media.discordapp.net/attachments/918381996483424306/962556561081897000/110_20220410122100.png")
-    await ctx.channel.send(embed=embed)
-  else:
-    embed = discord.Embed(title='이런!', description='어이쿠! 번역 기능은 `/번역 [내용]:(내용) [언어명]:(언어명)`으로 사용할 수 있어! 자세한 내용은 `/번역 [내용]:?`을 입력해 봐!\n\n`ERROR : parameter "r1" is already defined, line 1385, in main.py`', colour=0xff7676)
-    embed.set_thumbnail(url = "https://media.discordapp.net/attachments/918381996483424306/962556561081897000/110_20220410122100.png")
-    await ctx.channel.send(embed=embed)
+    await ctx.send(embed=embed)
 
 
 @slash.slash(name = "룰렛", description = "항목을 입력하면 랜덤으로 뽑아줍니다. 기본개형은 /룰렛 [항목]:(항목1)/(항목2)/(항목3)/....../(항목n)입니다.")
