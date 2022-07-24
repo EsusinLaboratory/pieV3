@@ -1437,39 +1437,15 @@ async def 룰렛(ctx,*,query):
                           colour=0xDDECCA)
     embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303113011210/download20220406195534.png")
   await ctx.channel.send(embed = embed)
-@bot.command()
-async def 넌센스(ctx):
+
+@slash.slash(name = "넌센스", description = "파이가 넌센스 퀴즈를 내요")
+async def _넌센스(ctx:SlashContext):
   content = nonsense[random.randrange(0, len(nonsense))]
   embed = discord.Embed(title="한 번 맞춰봐!!",
                         description = content,
                         colour=0xDDECCA)
   embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303553425498/110_20220410122834.png")
   await ctx.channel.send(embed = embed)
-
-
-@slash.slash(name="slashtest",
-             description="A test command (You can change it)",
-             options=[
-               create_option(
-                 name="opt",
-                 description="The option",
-                 option_type=3,  #check out the docs (link is provided in readme.md file) to know more about different types of options
-                 required=False,
-                 choices=[
-                  create_choice(
-                    name="FirstChoise",
-                    value="Happy"
-                  ),
-                  create_choice(
-                    name="SecondChoice",
-                    value="Sad :("
-                  )
-                ]
-               )
-             ])
-
-async def test(ctx, optone: str):
-  await ctx.send(content=f"Okay! I'm setting your current mood to  :p")
 
 @slash.slash(name = "test", description = "text")
 async def _test(ctx:SlashContext):
