@@ -1471,4 +1471,8 @@ async def 넌센스(ctx):
 async def test(ctx, optone: str):
   await ctx.send(content=f"Okay! I'm setting your current mood to  :p")
 
+@bot.slash_command(description="Hello World 출력하기") # 슬래시 커맨드 등록
+async def helloworld(ctx): # 슬래시 커맨드 이름
+    await ctx.respond("Hello World!") # 인터렉션 응답
+
 bot.run(os.environ['token'])
