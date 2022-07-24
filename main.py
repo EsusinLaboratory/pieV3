@@ -1445,7 +1445,7 @@ async def _넌센스(ctx:SlashContext):
                         description = content,
                         colour=0xDDECCA)
   embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303553425498/110_20220410122834.png")
-  await ctx.channel.send(embed = embed)
+  await ctx.send(embed = embed)
 
 @slash.slash(name = "test", description = "text")
 async def _test(ctx:SlashContext):
