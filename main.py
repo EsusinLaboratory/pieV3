@@ -8,8 +8,12 @@ import qrcode
 import os
 from discord_buttons_plugin import *
 from googletrans import Translator
+import asyncio
+from discord_slash import SlashCommand, cog_ext, SlashContext
+from discord_slash.utils.manage_commands import create_option, create_choice
 bot = commands.Bot(command_prefix='.')
 print("Working...")
+slash = SlashCommand(bot, sync_commands=True, sync_on_cog_reload=True)
 
 buttons = ButtonsClient(bot)
 @bot.event
@@ -1441,5 +1445,30 @@ async def 넌센스(ctx):
                         colour=0xDDECCA)
   embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303553425498/110_20220410122834.png")
   await ctx.channel.send(embed = embed)
+
+
+@slash.slash(name="slashtest",
+             description="A test command (You can change it)",
+             options=[
+               create_option(
+                 name="opt",
+                 description="The option",
+                 option_type=3,  #check out the docs (link is provided in readme.md file) to know more about different types of options
+                 required=False,
+                 choices=[
+                  create_choice(
+                    name="FirstChoise",
+                    value="Happy"
+                  ),
+                  create_choice(
+                    name="SecondChoice",
+                    value="Sad :("
+                  )
+                ]
+               )
+             ])
+
+async def test(ctx, optone: str):
+  await ctx.send(content=f"Okay! I'm setting your current mood to  :p")
 
 bot.run(os.environ['token'])
