@@ -1412,8 +1412,7 @@ async def _룰렛(ctx:SlashContext, 항목:str):
   global rullet
   global rulletcount
   global rulletposition
-  msg = (ctx.message.content[4:])
-  rullet = msg.split('/')
+  rullet = 항목.split('/')
   rulletcount = len(rullet)
   selection = random.randrange(0, rulletcount)
   selectioncontent = rullet[selection]
