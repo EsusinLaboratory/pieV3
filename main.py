@@ -1407,8 +1407,8 @@ async def on_member_remove(self, member):
   msg = "<@{}>님이 서버에서 나가거나 추방되었습니다.".format(str(member.id))
   await find_first_channel(member.guild.text_channels).send(msg)
   return None
-@bot.command()
-async def 룰렛(ctx,*,query):
+@slash.slash(name = "룰렛", description = "항목을 입력하면 랜덤으로 뽑아줍니다. 기본개형은 .룰렛 (항목1)/(항목2)/(항목3)/....../(항목n)입니다.")
+async def _룰렛(ctx:SlashContext, 항목:str):
   global rullet
   global rulletcount
   global rulletposition
@@ -1446,9 +1446,5 @@ async def _넌센스(ctx:SlashContext):
                         colour=0xDDECCA)
   embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303553425498/110_20220410122834.png")
   await ctx.send(embed = embed)
-
-@slash.slash(name = "test", description = "text")
-async def _test(ctx:SlashContext):
-  await ctx.send("hello world!")
 
 bot.run(os.environ['token'])
