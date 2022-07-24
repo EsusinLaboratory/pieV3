@@ -1347,16 +1347,15 @@ async def help_prior(ctx):
   await ctx.reply("이전 페이지로 넘겼습니다.")
   await event.respond(type=6)
 
-@bot.command()
-async def 번역(ctx,*,query):
-  msg = (ctx.message.content[4:])
-  r1 = msg.count('/')
+@slash.slash(name = "번역", description = "번역 명령어는 여러 가지의 언어로 번역을 해 주는 명령어입니다. 기본개형은 `/번역 [내용]:(내용) [언어명]:(언어명)`입니다. 번역 명령어에 관한 문서를 보려면 `/번역 [내용]:?`를 입력하십시오.")
+async def _번역(ctx:SlashContext, 내용:str, 언어명:str):
+  if not 내용 == "?":
+    r1 = 1
   if r1 == 1:
     global langtrans
     translator = Translator()
-    r2 = msg.split('/')
-    content = msg[:msg.find('/')]
-    lang = r2[1]
+    content = 내용
+    lang = 언어명
     if lang == "한국어" or lang == "일본어" or lang == "중국어 번체" or  lang == "중국어 간체" or lang == "영어":
       if lang == "한국어":
         langtrans = "ko"
@@ -1375,38 +1374,22 @@ async def 번역(ctx,*,query):
       await ctx.channel.send(embed=embed)
       
     else:
-      embed = discord.Embed(title=lang+'언어는 번역할 수 없어 ;(', description='번역 기능은 `.번역 (내용)/(언어명)`으로 사용할 수 있어! 구글 번역기 API를 이용하여 개발이 되었고, 사용할 수 있는 언어는 다음과 같아!\n**한국어**\n**중국어 번체**\n**중국어 간체**\n**일본어**\n**영어**', colour=0xff7676)
+      embed = discord.Embed(title=lang+'언어는 번역할 수 없어 ;(', description='번역 기능은 `/번역 [내용]:(내용) [언어명]:(언어명)`으로 사용할 수 있어! 구글 번역기 API를 이용하여 개발이 되었고, 사용할 수 있는 언어는 다음과 같아!\n**한국어**\n**중국어 번체**\n**중국어 간체**\n**일본어**\n**영어**', colour=0xff7676)
       embed.set_thumbnail(url = "https://media.discordapp.net/attachments/918381996483424306/962556561081897000/110_20220410122100.png")
       await ctx.channel.send(embed=embed)
     
     
 
   elif msg == "?":
-    embed = discord.Embed(title='번역 기능에 대해 자세히 알아봐!', description='번역 기능은 `.번역 (내용)/(언어명)`으로 사용할 수 있어! 구글 번역기 API를 이용하여 개발이 되었고, 사용할 수 있는 언어는 다음과 같아!\n**한국어**\n**중국어 번체**\n**중국어 간체**\n**일본어**\n**영어**', colour=0xff7676)
+    embed = discord.Embed(title='번역 기능에 대해 자세히 알아봐!', description='번역 기능은 `/번역 [내용]:(내용) [언어명]:(언어명)`으로 사용할 수 있어! 구글 번역기 API를 이용하여 개발이 되었고, 사용할 수 있는 언어는 다음과 같아!\n**한국어**\n**중국어 번체**\n**중국어 간체**\n**일본어**\n**영어**', colour=0xff7676)
     embed.set_thumbnail(url = "https://media.discordapp.net/attachments/918381996483424306/962556561081897000/110_20220410122100.png")
     await ctx.channel.send(embed=embed)
   else:
-    embed = discord.Embed(title='이런!', description='어이쿠! 번역 기능은 `.번역 (내용)/(언어명)`으로 사용할 수 있어! 자세한 내용은 `.번역 ?`을 입력해 봐!\n\n`ERROR : parameter "r1" is already defined, line 1385, in main.py`', colour=0xff7676)
+    embed = discord.Embed(title='이런!', description='어이쿠! 번역 기능은 `/번역 [내용]:(내용) [언어명]:(언어명)`으로 사용할 수 있어! 자세한 내용은 `/번역 [내용]:?`을 입력해 봐!\n\n`ERROR : parameter "r1" is already defined, line 1385, in main.py`', colour=0xff7676)
     embed.set_thumbnail(url = "https://media.discordapp.net/attachments/918381996483424306/962556561081897000/110_20220410122100.png")
     await ctx.channel.send(embed=embed)
-    
-#입장추방
-def find_first_channel(channels):
-    position_array = [i.position for i in channels]
 
-    for i in channels:
-        if i.position == min(position_array):
-            return i
-@bot.command()
-async def on_member_join(self, member):
-  msg = "<@{}>님이 서버에 들어오셨어요. 다 같이 <@{}>님을 환영하는 건 어떤가요?".format(str(member.id))
-  await find_first_channel(member.guild.text_channels).send(msg)
-  return None
-@bot.command()
-async def on_member_remove(self, member):
-  msg = "<@{}>님이 서버에서 나가거나 추방되었습니다.".format(str(member.id))
-  await find_first_channel(member.guild.text_channels).send(msg)
-  return None
+
 @slash.slash(name = "룰렛", description = "항목을 입력하면 랜덤으로 뽑아줍니다. 기본개형은 /룰렛 [항목]:(항목1)/(항목2)/(항목3)/....../(항목n)입니다.")
 async def _룰렛(ctx:SlashContext, 항목:str):
   global rullet
