@@ -1393,13 +1393,6 @@ async def _넌센스(ctx:SlashContext):
 
 @slash.slash(name = "영화", description = "네이버에서 영화를 검색해줍니다. 기본개형은 /룰렛 [영화제목]:(영화제목)입니다.")
 async def _영화(ctx:SlashContext, 영화제목:str):
-  embed = discord.Embed(
-      title="어디보자... "+영화제목+"이(가) 어딨더라..?",
-      description=
-          "데이터가 많이 있으면 처리하는데 시간이 많이 걸릴 수도 있어! 잠시만 기다려줘!",
-      colour=0xB8E9FF)
-  embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303364657152/110_20220410123521.png")
-  await ctx.channel.send(embed=embed)
   client_id = os.environ['id']
   client_secret = os.environ['secret']
 
@@ -1423,13 +1416,12 @@ async def _영화(ctx:SlashContext, 영화제목:str):
       actstr = actstr+"**"+i+"**, "
     else:
       actstr = actstr+"**"+i+"**"
-  await ctx.channel.purge(limit=1)
   embed = discord.Embed(title=":popcorn: "+title,
                         colour=0xDDECCA)
-  embed.add_field(name='**개봉 연도**', value=str(date))
-  embed.add_field(name='**감독**', value=directstr[1:])
-  embed.add_field(name='**배우**', value=actstr[1:])
-  embed.add_field(name='**평점**', value=str(rating))
+  embed.add_field(name='**개봉 연도**', value=str(date), inline=False)
+  embed.add_field(name='**감독**', value=directstr[1:], inline = False)
+  embed.add_field(name='**배우**', value=actstr[1:], inline = False)
+  embed.add_field(name='**평점**', value=str(rating), inline = False)
   embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303113011210/download20220406195534.png")
   embed.set_footer(text="Copyright Ⓒ NAVER Corp. All rights reserved.")
   await ctx.send(embed=embed)
