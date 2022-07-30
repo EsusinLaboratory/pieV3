@@ -1416,12 +1416,13 @@ async def _영화(ctx:SlashContext, 영화제목:str):
   actors=data['items'][0]['actor'].split('|')[:-1]
   rating=float(data['items'][0]['userRating'])
   await ctx.send(title+link+date+director+str(actors)+str(float(rating)))
-  directstr = "0"
-  for i in director:
-    directstr = directstr+"**"+i+"** "
+  directstr = "0**"+str(director)+"**"
   actstr = "0"
   for i in actors:
-    actstr = actstr+"**"+i+"** "
+    if len(actors) > 1:
+      actstr = actstr+"**"+i+"**, "
+    else:
+      actstr = actstr+"**"+i+"**"
   await ctx.channel.purge(limit=1)
   embed = discord.Embed(title=":popcorn: "+title,
                         colour=0xDDECCA)
