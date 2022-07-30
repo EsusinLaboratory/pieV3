@@ -9,6 +9,8 @@ import os
 from discord_buttons_plugin import *
 from googletrans import Translator
 import asyncio
+import sys
+import pandas
 from discord_slash import SlashCommand, cog_ext, SlashContext
 from discord_slash.utils.manage_commands import create_option, create_choice
 bot = commands.Bot(command_prefix='.')
@@ -1389,4 +1391,22 @@ async def _넌센스(ctx:SlashContext):
   embed.set_thumbnail(url = "https://media.discordapp.net/attachments/933687912950808608/962557303553425498/110_20220410122834.png")
   await ctx.send(embed = embed)
 
+@slash.slash(name = "영화", description = "네이버에서 영화를 검색해줍니다. 기본개형은 /룰렛 [영화제목]:(영화제목)입니다.")
+async def _영화(ctx:SlashContext, 영화제목:str):
+  client_id = os.environ['id']
+  client_secret = os.environ['secret']
+
+  movie=영화제목
+  header_parms = {"X-Naver-Client-Id":client_id, "X-Naver-Client-Secret":client_secret}
+  url = f"https://openapi.naver.com/v1/search/movie.json?query={movie}"
+  res = requests.get(url, headers=header_parms)
+  data = res.json()
+
+  title=data['items'][0]['title'].strip('</b>')
+  link=data['items'][0]['link']
+  date=data['items'][0]['pubDate']
+  director=data['items'][0]['director'].split('|')[0]
+  actors=data['items'][0]['actor'].split('|')[:-1]
+  rating=float(data['items'][0]['userRating'])
+  await ctx.send(title+link+date+director+str(actors)+str(float(rating)))
 bot.run(os.environ['token'])
